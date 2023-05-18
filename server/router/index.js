@@ -3,8 +3,8 @@ const router = Router()
 
 const users = require('../controllers/user_controller')
 router.get("/user", users.GetUser )
-router.post("/adduser")
-router.delete("/deluser")
-router.post("/upduser");
+router.post("/adduser", users.AddUser )
+router.delete("/deluser", users.DelUser)
+router.post("/upduser", users.UpdateUser);
 
 module.exports = router

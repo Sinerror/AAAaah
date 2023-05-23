@@ -1,56 +1,46 @@
-const { response } = require('express');
-const userService = require('../services/user_service')
+const user_service = require("../service/user_service.js")
+
+// в контролере собраны все методы для работы в данном случае с пользователем
+// вы создаете методы которые в свою очередь определяете ддя каждого эндпоинта
+// в роутере у этих методов в круглых скобках есть входные аргументы
+// req-то что прилетает от клиента(постман) res-ответ нашего сервера клиенту
+// next просто пока не трогайте
 
 class UserController {
-    async GetUser(req, res, next) {
+    async GetUser(req, res, next)
+    {
         try {
-            res.json(await userService.getallusers())
-        } catch (e) {
-            res.json({ "error": "EXCEPTION" })
+            res.json(await user_service.GetAllUsers())
+        } catch(e) {
+            res.json({"error": "EXCEPTION"})
         }
     }
 
-    async AddUser(req, res, next) {
+    async AddUser(req, res, next)
+    {
         try {
-            res.json(await userService.CreateUser(req))
-        } catch (e) {
+            res.json(await user_service.AddUser(req))
+        } catch(e) {
+            res.json({"error": "EXCEPTION"})
+        }
+    }
+
+    async DelUser(req, res, next)
+    {
+        try {
+            res.json(await user_service.DeleteUser(req))
+        } catch(e) {
             console.log(e)
+            res.json({"error": "EXCEPTION"})
         }
     }
-    async DelUser(req, res, next) {
+    async UpdateUser(req, res, next)
+    {
         try {
-            res.json(await userService.deleteUsers())
-        } catch (e) {
-            res.json({ "error": "EXCEPTION" })
-        }
-    }
-    async UpUser(req, res, next) {
-        const { email, age } = changes
-        try {
-            const user = await prisma.user.update({
-                where: {
-                    id
-                },
-                data: {
-                    email,
-                    profile: {
-                        update: {
-                            age
-                        }
-                    }
-                },
-                select: {
-                    email: true
-                },
-                include: {
-                    profile: true
-                }
-            })
-            return user
-        } catch (e) {
-            res.json(await userService.update(req))
-
-            res.json({ "error": "EXCEPTION" })
+            res.json(await user_service.UpdateUser(req))
+        } catch(e) {
+            console.log(e)
+            res.json({"error": "EXCEPTION"})
         }
     }
 }

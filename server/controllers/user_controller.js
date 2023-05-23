@@ -1,39 +1,56 @@
-const user_service = require("../services/user_service")
+const { response } = require('express');
+const userService = require('../services/user_service')
 
 class UserController {
-    async GetUser(req, res, next)
-    {
+    async GetUser(req, res, next) {
         try {
-            res.json(await user_service.GetAllUsers())
-        } catch(e) {
-            res.json({"error": "EXCEPTION"})
+            res.json(await userService.getallusers())
+        } catch (e) {
+            res.json({ "error": "EXCEPTION" })
         }
     }
 
-    async AddUser(req, res, next)
-    {
+    async AddUser(req, res, next) {
         try {
-            res.json({"endpoint": "adduser"})
-        } catch(e) {
-            res.json({"error": "EXCEPTION"})
+            res.json(await userService.CreateUser(req))
+        } catch (e) {
+            console.log(e)
         }
     }
-
-    async DelUser(req, res, next)
-    {
+    async DelUser(req, res, next) {
         try {
-            res.json({"endpoint": "deluser"})
-        } catch(e) {
-            res.json({"error": "EXCEPTION"})
+            res.json(await userService.deleteUsers())
+        } catch (e) {
+            res.json({ "error": "EXCEPTION" })
         }
     }
-
-    async UpdateUser(req, res, next)
-    {
+    async UpUser(req, res, next) {
+        const { email, age } = changes
         try {
-            res.json({"endpoint": "upduser"})
-        } catch(e) {
-            res.json({"error": "EXCEPTION"})
+            const user = await prisma.user.update({
+                where: {
+                    id
+                },
+                data: {
+                    email,
+                    profile: {
+                        update: {
+                            age
+                        }
+                    }
+                },
+                select: {
+                    email: true
+                },
+                include: {
+                    profile: true
+                }
+            })
+            return user
+        } catch (e) {
+            res.json(await userService.update(req))
+
+            res.json({ "error": "EXCEPTION" })
         }
     }
 }

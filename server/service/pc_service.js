@@ -23,7 +23,7 @@ class PCService {
                     RAM,
                     keyboard,
                     monitor,
-                    PCId
+                    userId
                 },
             })
             //если все успешно возвращаем пользователя обратно в контроллер

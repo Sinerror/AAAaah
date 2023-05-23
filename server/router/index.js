@@ -14,10 +14,10 @@ router.post("/adduser",users.AddUser)
 router.delete("/deluser",users.DelUser)
 router.post("/upduser",users.UpdateUser)
 
-const users = require("../controllers/pc_controller")
-router.get("/pcs", users.GetPC)
-router.post("/addpc",users.AddPC)
-router.delete("/delpc",users.DelPC)
-router.post("/updpc",users.UpdatePC)
+const pcs = require("../controllers/pc_controller")
+router.get("/pcs", pcs.GetPC)
+router.post("/addpc",pcs.AddPC)
+router.delete("/delpc",pcs.DelPC)
+router.post("/updpc",pcs.UpdatePC)
 
 module.exports = router

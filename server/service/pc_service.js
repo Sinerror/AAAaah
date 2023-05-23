@@ -8,7 +8,7 @@ class PCService {
     async AddPC(req) {
         // с помощью такой конструкции мы сразу ищем в запросе нужные нам поля для юзера и записываем их в переменные
 
-        const { firstName, lastName, email, numberPhone, position, jobPlace } = req.body;
+        const { motherboard, processor, videocard, RAM, keyboard, monitor, userId } = req.body;
     
         try {
             // у призмы есть много методов которые вы можете загуглить для создания используется

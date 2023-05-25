@@ -76,8 +76,17 @@ class UserService {
     async DeleteUser(req)
     {
         const { id } = req.body;
-        
-        await prisma_client.user.deleteMany({"where" : { "id": id}})
+
+        var bHas = await prisma_client.user.count({"where": {"id": id}}) 
+                > 0 ? false : true
+            if (bHas)
+            {
+                return {"error" : "ERROR - NOT FOUND"}
+            }
+
+        await prisma_client.PC.deleteMany({"where" : { "userId": id}})
+        await prisma_client.user.deleteMany({"where" : { "id": id}});
+
         return { "error" : "SUCCESS" }
     }
 }

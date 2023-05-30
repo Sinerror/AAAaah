@@ -75,7 +75,7 @@ class UserService {
 
     async DeleteUser(req)
     {
-        const { id } = req.body;
+        const { id } = req.params.id;
 
         var bHas = await prisma_client.user.count({"where": {"id": id}}) 
                 > 0 ? false : true
